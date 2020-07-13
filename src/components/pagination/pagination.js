@@ -14,7 +14,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
             <span key={index}>
               <a 
                 onClick={() => paginate(number)}
-                href="!#"
+               
                 className="page-link"
               >
                 {number}
