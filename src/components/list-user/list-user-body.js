@@ -1,11 +1,10 @@
 import React , { useState }from 'react';
-import Indiviualuser from '../Userview/userview';
+import Indiviualuser from '../userview/userview';
 import Spinner from '../spinner/spinner';
 import axios from 'axios';
 
 
 const Usercontent = ({bodyData, loading}) =>{
- //console.log(bodyData, "bodyData")
   const [userInfo, setuserInfo] = useState([]);
     if(loading){
         return <Spinner />
