@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const Usercontent = ({bodyData, loading}) =>{
-  
+ //console.log(bodyData, "bodyData")
   const [userInfo, setuserInfo] = useState([]);
     if(loading){
         return <Spinner />
@@ -21,7 +21,7 @@ return(
    <React.Fragment>
         {
           bodyData && bodyData && bodyData.map((ele,index) => {
-            // console.log(ele.id, "ele")
+           
              
               return(
                 

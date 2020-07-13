@@ -12,8 +12,8 @@ const Listuser = () => {
     const [values, setValue] = useState('');
     const [loading, setLoading] = useState(false);
     const [currentPage,  setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(4);
-    const [pageNumber , setPageNumber] = useState(1);
+    // const [postsPerPage] = useState(4);
+    const [pagenumber , setPageNumber] = useState(1);
   
   
    
@@ -21,26 +21,29 @@ const Listuser = () => {
     useEffect(() => {
       const fetchPosts = async () => {
         setLoading(true);
-        const res = await axios.get(`https://reqres.in/api/users?page=${pageNumber}`);
+        const res = await axios.get(`https://reqres.in/api/users?page=${pagenumber}`);
+
+        console.log(res, "res")
         setPosts(res.data);
         setLoading(false);
       };
   
       fetchPosts();
-    }, []);
+    }, [pagenumber]);
     
     let data  = posts &&  posts.data ? posts.data : [];
-    // Get current posts
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+   
+    const indexOfLastPost = currentPage * posts.per_page;
+    const indexOfFirstPost = posts.per_page - indexOfLastPost ;
     const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
-  
+    
+    console.log(currentPosts, "currentPage")
     // // Change page
   
     const paginate = async (pageNumber) =>{ 
        setCurrentPage(pageNumber);
-        setPageNumber(pageNumber)
-      //  fetchPosts();
+      setPageNumber(pageNumber)
+      
       };
 
     const handleSearch = (value) => {
@@ -75,8 +78,8 @@ const Listuser = () => {
         </table>
      <div style={{paddingLeft: '50px'}}>
         <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={data.length}
+          postsPerPage={posts.per_page}
+          totalPosts={posts.total}
           paginate={paginate}
         />
       
